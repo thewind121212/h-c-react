@@ -1,21 +1,10 @@
 import React , { Component } from 'react'
-import logo from './logo.svg';
-import './App.css';
-import Person from './Person'
-import styled from 'styled-components'
+import logo from '../logo.svg';
+import classes from './App.css';
+import Persons from '../components/Persons/Persons'
 import { render } from '@testing-library/react';
+import Cockpit from '../components/Cockpit/Cockpit'
 
-
-const StyledButton = styled.button`
-      background-color: ${ props => props.alt ? 'red' : 'green'};
-      font: inherit;
-      border: 1px solid blue;
-      padding: 8px;
-      &:hover  {
-      background-color: white;
-      color: black
-      }
-`
 
 class App extends Component  {
    state = {
@@ -55,46 +44,26 @@ class App extends Component  {
     console.log(this.state)
   }      
 
-
-  
-        
-
-
       render(){
                 let person = null;
+                let buttonStyle = '';
         if (this.state.showPerson) {
           person = (
             <div>
-              {this.state.persons.map( (person, index) => {
-                return (
-                  <Person click={this.deleteNameHandler.bind(this, index)}
-                      name={person.name}
-                      age={person.age}
-                      key={person.id}
-                      changed={ event => this.nameChangeHandler(event, person.id)}/>
-                    
-                      )
-            })
-              }
+              <Persons  persons = {this.state.persons} 
+                        clicked = {this.deleteNameHandler}
+                        changed = {this.nameChangeHandler}/>
             </div> )
-          console.log(StyledButton)
         }
 
-        const classes = [];
-        if (this.state.persons.length < 3) {
-          classes.push('red')
-        }
-        if (this.state.persons.length < 2) {
-          classes.push('bold')
-        }
+       
 
         return (
-          <div className="App"> 
-        <h1>Hi, I' m react app</h1>
-        <p className={classes.join(' ')}>This is my project</p>
-        <StyledButton onClick={this.togglePersonHandler}
-                      alt={this.state.showPerson}
-        >Switch Name</StyledButton>
+          <div className={classes.App}> 
+          <Cockpit  title = {this.props.appTitle}
+                    showPerson = {this.state.showPerson}
+                    persons = {this.state.persons}
+                    show = {this.togglePersonHandler}/>
           {person}
       </div>
     )
