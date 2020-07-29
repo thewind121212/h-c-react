@@ -1,8 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import classes from './Cockpit.css'
 
 
-const cockpit = (props) => {
+const Cockpit = (props) => {
+    useEffect(() => {
+      console.log('[Cockpit.js] use effect');
+      setTimeout(() => {
+        alert('send the data to the cloud')
+      },1000)
+    },[])
+
     let btnStyle = [];
     if (props.showPerson) {
         btnStyle = (classes.Change);
@@ -26,4 +33,4 @@ const cockpit = (props) => {
         )
 }
 
-export default cockpit;
+export default Cockpit;

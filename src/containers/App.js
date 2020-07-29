@@ -7,6 +7,10 @@ import Cockpit from '../components/Cockpit/Cockpit'
 
 
 class App extends Component  {
+  constructor(props) {
+    super(props)
+    console.log('[App.js] constructor')
+  }
    state = {
     persons: [
       {id:"ss130212", name: "linh", age:18},
@@ -16,6 +20,12 @@ class App extends Component  {
     otherState: 'something value',
     showPerson: false
   };
+
+  static getDerivedStateFromProps(props, state) {
+    console.log('[App.js] getDeviredStateFromProps')
+    return state;
+  }
+
 
      deleteNameHandler = (indexOfName) => {
         const persons = [...this.state.persons];
@@ -44,8 +54,13 @@ class App extends Component  {
     console.log(this.state)
   }      
 
+    componentDidMount() {
+      console.log('[App.js] componentDidMount')
+    }
+
       render(){
-                let person = null;
+        console.log('[App.js] render')
+        let person = null;
                 let buttonStyle = '';
         if (this.state.showPerson) {
           person = (
